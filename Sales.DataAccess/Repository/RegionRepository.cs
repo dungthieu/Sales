@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 
 namespace Sales.DataAccess.Repository
-{ 
-    public interface IOrderDetailRepository : IBaseRepository<OrderDetail>
+{
+    public interface IRegionRepository : IBaseRepository<Region>
     {
-        List<OrderDetail> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        List<Region> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
     }
-    public class OrderDetailRepository : BaseRepository<OrderDetail>, IOrderDetailRepository
+    public class RegionRepository : BaseRepository<Region>, IRegionRepository
     {
-        public OrderDetailRepository(SalesContext context) : base(context)
+        public RegionRepository(SalesContext context) : base(context)
         {
         }
-        public List<OrderDetail> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
+        public List<Region> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
         out int totalPage)
         {
             currentPage = (currentPage <= 0) ? 1 : currentPage;
@@ -29,7 +29,7 @@ namespace Sales.DataAccess.Repository
                 query = query.OrderByField(sortColumn.Trim(), sortDirection);
             }
             else
-                query = query.OrderByDescending(c => c.OrderId);
+                query = query.OrderByDescending(c => c.RegionId);
 
             return query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }

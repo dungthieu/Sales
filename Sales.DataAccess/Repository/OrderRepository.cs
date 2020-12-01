@@ -7,16 +7,16 @@ using System.Text;
 
 namespace Sales.DataAccess.Repository
 {
-    public interface IOrderRepository : IBaseRepository<Order>
+    public interface IOrderRepository : IBaseRepository<ProductRepository>
     {
-        List<Order> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        List<ProductRepository> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
     }
-    public class OrderRepository : BaseRepository<Order>, IOrderRepository
+    public class OrderRepository : BaseRepository<ProductRepository>, IOrderRepository
     {
         public OrderRepository(SalesContext context) : base(context)
         {
         }
-        public List<Order> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
+        public List<ProductRepository> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
         out int totalPage)
         {
             currentPage = (currentPage <= 0) ? 1 : currentPage;
