@@ -1,4 +1,5 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sales.DataAccess.Entities;
 using Sales.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;
@@ -9,29 +10,19 @@ namespace Sales.DataAccess.Repository
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
-        List<Category> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        List<Category> GetListCategory();
     }
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(SalesContext context) : base(context)
         {
         }
-        public List<Category> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
-        out int totalPage)
+        public List<Category> GetListCategory()
         {
-            currentPage = (currentPage <= 0) ? 1 : currentPage;
-            pageSize = (pageSize <= 0) ? 20 : pageSize;
+           
 
-            var query = Dbset.AsQueryable();
-            totalPage = query.Count();
-            if (!string.IsNullOrEmpty(sortColumn))
-            {
-                query = query.OrderByField(sortColumn.Trim(), sortDirection);
-            }
-            else
-                query = query.OrderByDescending(c => c.CategoryId);
-
-            return query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var query = Dbset.AsQueryable();               
+            return query.ToList();
         }
     }
 
