@@ -1,37 +1,29 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sales.DataAccess.Entities;
 using Sales.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;    
 using System.Text;
 
 namespace Sales.DataAccess.Repository
 {
     public interface ICustomerRepository : IBaseRepository<Customer>
     {
-        List<Customer> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        Customer SignIn(string User, string Pass);
+
+       
     }
     public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         public CustomerRepository(SalesContext context) : base(context)
         {
         }
-        public List<Customer> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
-        out int totalPage)
+        public Customer SignIn(string User, string Pass)
         {
-            currentPage = (currentPage <= 0) ? 1 : currentPage;
-            pageSize = (pageSize <= 0) ? 20 : pageSize;
-
             var query = Dbset.AsQueryable();
-            totalPage = query.Count();
-            if (!string.IsNullOrEmpty(sortColumn))
-            {
-                query = query.OrderByField(sortColumn.Trim(), sortDirection);
-            }
-            else
-                query = query.OrderByDescending(c => c.CustomerId);
-
-            return query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            query = query.Where(x => x.User == User && x.Password == Pass);
+            return query.FirstOrDefault();
         }
     }
 

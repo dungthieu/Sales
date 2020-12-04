@@ -10,7 +10,7 @@ namespace Sales.DataAccess.Repository
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
-        List<Category> GetListCategory();
+        List<Category> GetListCategory(); 
     }
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
