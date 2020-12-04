@@ -3,7 +3,7 @@ using Sales.DataAccess.Entities;
 using Sales.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq;    
 using System.Text;
 
 namespace Sales.DataAccess.Repository
@@ -11,6 +11,7 @@ namespace Sales.DataAccess.Repository
     public interface ICustomerRepository : IBaseRepository<Customer>
     {
         Customer SignIn(string User, string Pass);
+
        
     }
     public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository

@@ -1,4 +1,5 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sales.DataAccess.Entities;
 using Sales.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,18 @@ namespace Sales.DataAccess.Repository
 {
     public interface ICartRepository : IBaseRepository<Cart>
     {
-        List<Cart> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        List<Cart> Carts(string customerId);
     }
     public class CartRepository : BaseRepository<Cart>, ICartRepository
     {
         public CartRepository(SalesContext context) : base(context)
         {
         }
-        public List<Cart> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
-        out int totalPage)
+        public List<Cart> Carts(string customerId)
         {
-            currentPage = (currentPage <= 0) ? 1 : currentPage;
-            pageSize = (pageSize <= 0) ? 20 : pageSize;
-
             var query = Dbset.AsQueryable();
-            totalPage = query.Count();
-            if (!string.IsNullOrEmpty(sortColumn))
-            {
-                query = query.OrderByField(sortColumn.Trim(), sortDirection);
-            }
-            else
-                query = query.OrderByDescending(c => c.CookieName);
-
-            return query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            query = query.Include(x => x.Customer).Where(x => x.CustomerId == customerId);
+            return query.ToList();
         }
     }
 
