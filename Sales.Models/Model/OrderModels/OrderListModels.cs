@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sales.Models.Model.OrderModels
 {
-    public class OrderListMOdels
+    public class OrderListModels
     {
         public int OrderId { get; set; }
         public string CustomerId { get; set; }
