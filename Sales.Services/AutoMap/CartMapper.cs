@@ -46,7 +46,7 @@ namespace Sales.Services.AutoMap
             return model;
 
         }
-        public static Cart MapToEntity(this CartEditModels Model)
+        public static Cart MapToEditEntity(this CartEditModels Model)
         {
             return new Cart
             {
@@ -58,7 +58,7 @@ namespace Sales.Services.AutoMap
                 CustomerId = Model.CustomerId
             };
         }
-        public static Cart MapToListEntity(this CartListModels Model)
+        public static Cart MapToEntity(this CartListModels Model)
         {
             return new Cart
             {
@@ -86,12 +86,12 @@ namespace Sales.Services.AutoMap
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        public static List<Cart> MapToEditModels(this List<CartEditModels> models)
+        public static List<Cart> MapToEntities(this List<CartListModels> models)
         {
             return models.Select(x => x.MapToEntity()).ToList();
         }
         
-        public static List<CartListModels> MapToEditEntities(this List<Cart> Entities)
+        public static List<CartListModels> MapToModels(this List<Cart> Entities)
         {
             return Entities.Select(x => x.MapToModel()).ToList();
         }
