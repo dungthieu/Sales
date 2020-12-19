@@ -10,6 +10,6 @@ namespace Sales.Models.Model.EmployeeModels
         public string TextSearch { get; set; }
         public string SortColumn { get; set; }
         public string SortDirection { get; set; }
-        public List<EmployeeListModel> EmployeeModel { get; set; }
+        public List<EmployeeListModels> EmployeeModel { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace Sales.Services.AutoMap
                 Description = model.Description
             };
         }
-        public static Category MapToEntity(this CategoryEditModels model, Category entity)
+        public static Category MapToEditEntity(this CategoryEditModels model, Category entity)
         {
 
             entity.CategoryId = model.CategoryId;
@@ -64,11 +64,11 @@ namespace Sales.Services.AutoMap
             entity.Description = model.Description;
             return entity;
         }
-        public static List<CategoryListModels> MapToEnities(this List<Category> entities)
+        public static List<CategoryListModels> MapToModels(this List<Category> entities)
         {
             return entities.Select(x => x.MapToModel()).ToList();
         }
-        public static List<Category> MapToModels(this List<CategoryEditModels> models)
+        public static List<Category> MapToEntities(this List<CategoryEditModels> models)
         {
             return models.Select(x => x.MapToEditEntity()).ToList();
         }

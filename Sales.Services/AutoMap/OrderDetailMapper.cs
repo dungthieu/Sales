@@ -2,13 +2,14 @@
 using Sales.Models.Model.OrderDetailModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
 {
     public static class OrderDetailMapper
     {
-        public static OrderDetail MapToEntity ( this OrderDetailListModel model)
+        public static OrderDetail MapToEntity ( this OrderDetailListModels model)
         {
             return new OrderDetail {
                 OrderId = model.OrderId,
@@ -19,7 +20,7 @@ namespace Sales.Services.AutoMap
             };
 
         }
-        public static OrderDetail MapToEditEntity(this OrderDetailEditModel model)
+        public static OrderDetail MapToEditEntity(this OrderDetailEditModels model)
         {
             return new OrderDetail
             {
@@ -31,9 +32,20 @@ namespace Sales.Services.AutoMap
             };
 
         }
-        public static OrderDetailListModel MapToModel(this OrderDetail Entity)
+        public static OrderDetail MapToEditEntity(this OrderDetailEditModels model, OrderDetail entity)
         {
-            return new OrderDetailListModel
+
+            entity.OrderId = model.OrderId;
+            entity.ProductId = model.ProductId;
+            entity.UnitPrice = model.UnitPrice;
+            entity.Quantity = model.Quantity;
+            entity.Discount = model.Discount;
+            return entity;
+
+        }
+        public static OrderDetailListModels MapToModel(this OrderDetail Entity)
+        {
+            return new OrderDetailListModels
             {
                 OrderId = Entity.OrderId,
                 ProductId = Entity.ProductId,
@@ -43,9 +55,9 @@ namespace Sales.Services.AutoMap
             };
 
         }
-        public static OrderDetailEditModel MapToEditModel(this OrderDetail Entity)
+        public static OrderDetailEditModels MapToEditModel(this OrderDetail Entity)
         {
-            return new OrderDetailEditModel
+            return new OrderDetailEditModels
             {
                 OrderId = Entity.OrderId,
                 ProductId = Entity.ProductId,
@@ -54,6 +66,10 @@ namespace Sales.Services.AutoMap
                 Discount = Entity.Discount
             };
 
+        }
+        public static List<OrderDetailListModels> MapToModels(this List<OrderDetail> entities)
+        {
+            return entities.Select(x => x.MapToModel()).ToList();
         }
     }
 }

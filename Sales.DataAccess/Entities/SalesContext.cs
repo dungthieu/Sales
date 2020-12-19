@@ -27,7 +27,7 @@ namespace Sales.DataAccess.Entities
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
@@ -241,7 +241,7 @@ namespace Sales.DataAccess.Entities
                     .HasConstraintName("FK_Orders_Shippers");
             });
 
-            modelBuilder.Entity<OrderDetail>(entity =>
+            modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.ProductId })
                     .HasName("PK_Order_Details");
@@ -259,13 +259,13 @@ namespace Sales.DataAccess.Entities
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderDetails)
+                    .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Details_Orders");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
+                    .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Details_Products");

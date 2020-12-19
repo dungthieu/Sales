@@ -7,17 +7,23 @@ using System.Text;
 
 namespace Sales.DataAccess.Repository
 {
-    public interface IOrderRepository : IBaseRepository<ProductRepository>
+    public interface IOrderRepository : IBaseRepository<Order>
     {
-        List<ProductRepository> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
+        Order getOrder(int OrderId, string customerId, int? employeeId );
+        List<Order> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
     }
-    public class OrderRepository : BaseRepository<ProductRepository>, IOrderRepository
+    public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
         public OrderRepository(SalesContext context) : base(context)
         {
         }
-        public List<ProductRepository> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
-        out int totalPage)
+        public Order getOrder(int OrderId, string customerId, int? employeeId)
+        {
+            var query = Dbset.AsQueryable();
+            query = query.Where(x=>x.CustomerId == customerId && x.OrderId==OrderId&& x.EmployeeId==employeeId);
+            return query.FirstOrDefault();
+        }
+        public List<Order> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage)
         {
             currentPage = (currentPage <= 0) ? 1 : currentPage;
             pageSize = (pageSize <= 0) ? 20 : pageSize;

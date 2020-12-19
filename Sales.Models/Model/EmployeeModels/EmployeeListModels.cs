@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sales.Models.Model.EmployeeModels
 {
-   public class EmployeeEditModel
+    public class EmployeeListModels
     {
         public int EmployeeId { get; set; }
         public string LastName { get; set; }

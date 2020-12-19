@@ -2,13 +2,14 @@
 using Sales.Models.Model.CustomerModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
 {
     public static class CustomerMapper
     {
-        public static Customer MapToModel(this CustomerListModels model)
+        public static Customer MapToEntity(this CustomerListModels model)
         {
             return new Customer
             {
@@ -29,8 +30,7 @@ namespace Sales.Services.AutoMap
             };
 
         }
-
-        public static CustomerListModels MapToEnitiy(this Customer entity)
+        public static CustomerListModels MapToModel(this Customer entity)
         {
             return new CustomerListModels
             {
@@ -47,11 +47,10 @@ namespace Sales.Services.AutoMap
                 Fax = entity.Fax,
                 User = entity.User,
                 Password = entity.Password,
-
             };
 
         }
-        public static CustomerListModels MapToEnitiy(this Customer entity, CustomerListModels model)
+        public static CustomerListModels MapToModel(this Customer entity, CustomerListModels model)
         {
             model.CustomerId = entity.CustomerId;
             model.CompanyName = entity.CompanyName;
@@ -66,11 +65,9 @@ namespace Sales.Services.AutoMap
             model.Fax = entity.Fax;
             model.User = entity.User;
             model.Password = entity.Password;
-
             return model;
-        }
-
-        public static Customer MapToModel(this CustomerListModels model, Customer entity)
+        }      
+        public static Customer MapToEntity(this CustomerListModels model, Customer entity)
         {
             entity.CustomerId = model.CustomerId;
             entity.CompanyName = model.CompanyName;
@@ -85,10 +82,12 @@ namespace Sales.Services.AutoMap
             entity.Fax = model.Fax;
             entity.User = model.User;
             entity.Password = model.Password;
-
             return entity;
         }
 
-
+        public static List<CustomerListModels> MapToModels(this List<Customer> entities)
+        {
+            return entities.Select(x => x.MapToModel()).ToList();
+        }
     }
 }

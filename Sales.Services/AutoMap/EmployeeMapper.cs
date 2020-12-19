@@ -2,15 +2,16 @@
 using Sales.Models.Model.EmployeeModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
 {
     public static class EmployeeMapper
     {
-        public static EmployeeListModel MapToModel(this Employee entity)
+        public static EmployeeListModels MapToModel(this Employee entity)
         {
-            return new EmployeeListModel
+            return new EmployeeListModels
             {
                 EmployeeId = entity.EmployeeId,
                 LastName = entity.LastName,
@@ -32,7 +33,31 @@ namespace Sales.Services.AutoMap
                 PhotoPath = entity.PhotoPath
             };
         }
-        public static EmployeeEditModel MapToEditModel(this Employee entity, EmployeeEditModel model)
+        public static EmployeeEditModels MapToEditModel(this Employee entity)
+        {
+            return new EmployeeEditModels
+            {
+                EmployeeId = entity.EmployeeId,
+                LastName = entity.LastName,
+                FirstName = entity.FirstName,
+                Title = entity.Title,
+                TitleOfCourtesy = entity.TitleOfCourtesy,
+                BirthDate = entity.BirthDate,
+                HireDate = entity.HireDate,
+                Address = entity.Address,
+                City = entity.City,
+                Region = entity.Region,
+                PostalCode = entity.PostalCode,
+                Country = entity.Country,
+                HomePhone = entity.HomePhone,
+                Extension = entity.Extension,
+                Photo = entity.Photo,
+                Notes = entity.Notes,
+                ReportsTo = entity.ReportsTo,
+                PhotoPath = entity.PhotoPath
+            };
+        }
+        public static EmployeeEditModels MapToEditModel(this Employee entity, EmployeeEditModels model)
         {
 
             model.EmployeeId = entity.EmployeeId;
@@ -55,7 +80,7 @@ namespace Sales.Services.AutoMap
             model.PhotoPath = entity.PhotoPath;
             return model;
         }
-        public static Employee MapToEntity(this EmployeeEditModel model)
+        public static Employee MapToEditEntity(this EmployeeEditModels model)
         {
             return new Employee
             {
@@ -79,7 +104,7 @@ namespace Sales.Services.AutoMap
                 PhotoPath = model.PhotoPath
             };
         }
-        public static Employee MapToEntity(this EmployeeEditModel model, Employee entity)
+        public static Employee MapToEditEntity(this EmployeeEditModels model, Employee entity)
         {
             entity.EmployeeId = model.EmployeeId;
             entity.LastName = model.LastName;
@@ -101,6 +126,10 @@ namespace Sales.Services.AutoMap
             entity.PhotoPath = model.PhotoPath;
             return entity;
 
+        }
+        public static List<EmployeeListModels> MapToModels(this List<Employee> entities)
+        {
+            return entities.Select(x => x.MapToModel()).ToList();
         }
 
     }

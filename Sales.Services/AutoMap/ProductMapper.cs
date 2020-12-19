@@ -2,6 +2,7 @@
 using Sales.Models.Model.ProductModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
@@ -40,6 +41,21 @@ namespace Sales.Services.AutoMap
                 Discontinued = model.Discontinued
             };
         }
+        public static Product MapToEditEntity(this ProductEditModels model, Product entity)
+        {
+
+            entity.ProductId = model.ProductId;
+            entity.ProductName = model.ProductName;
+            entity.SupplierId = model.SupplierId;
+            entity.CategoryId = model.CategoryId;
+            entity.QuantityPerUnit = model.QuantityPerUnit;
+            entity.UnitPrice = model.UnitPrice;
+            entity.UnitsInStock = model.UnitsInStock;
+            entity.UnitsOnOrder = model.UnitsOnOrder;
+            entity.ReorderLevel = model.ReorderLevel;
+            entity.Discontinued = model.Discontinued;
+            return entity;
+        }
         public static ProductListModels MapToModel(this Product entity)
         {
             return new ProductListModels
@@ -71,6 +87,10 @@ namespace Sales.Services.AutoMap
                 ReorderLevel = entity.ReorderLevel,
                 Discontinued = entity.Discontinued
             };
+        }
+        public static List<ProductListModels> MapToModels(this List<Product> products)
+        {
+            return products.Select(x => x.MapToModel()).ToList();
         }
     }
 }

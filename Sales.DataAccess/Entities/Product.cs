@@ -10,7 +10,7 @@ namespace Sales.DataAccess.Entities
         public Product()
         {
             Carts = new HashSet<Cart>();
-            OrderDetails = new HashSet<OrderDetail>();
+            Employees = new HashSet<Employee>();
         }
 
         public int ProductId { get; set; }
@@ -27,6 +27,6 @@ namespace Sales.DataAccess.Entities
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

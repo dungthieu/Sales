@@ -2,13 +2,14 @@
 using Sales.Models.Model.ShipperModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
 {
-   public static class ShipperMapper
+    public static class ShipperMapper
     {
-        public static Shipper MapToEntity (this ShipperListModels model)
+        public static Shipper MapToEntity(this ShipperListModels model)
         {
             return new Shipper
             {
@@ -25,6 +26,15 @@ namespace Sales.Services.AutoMap
                 CompanyName = model.CompanyName,
                 Phone = model.Phone
             };
+        }
+        public static Shipper MapToEditEntity(this ShipperEditModels model, Shipper entity)
+        {
+
+            entity.ShipperId = model.ShipperId;
+            entity.CompanyName = model.CompanyName;
+            entity.Phone = model.Phone;
+            return entity;
+
         }
         public static ShipperListModels MapToModel(this Shipper entity)
         {
@@ -44,7 +54,10 @@ namespace Sales.Services.AutoMap
                 Phone = entity.Phone
             };
         }
+        public static List<ShipperListModels> MapToModels(this List<Shipper> entities)
+        {
+            return entities.Select(x => x.MapToModel()).ToList();
+        }
     }
-}
 
- 
+}

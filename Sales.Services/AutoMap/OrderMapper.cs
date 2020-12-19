@@ -2,6 +2,7 @@
 using Sales.Models.Model.OrderModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Sales.Services.AutoMap
@@ -28,7 +29,7 @@ namespace Sales.Services.AutoMap
                 ShipCountry = model.ShipCountry
             };
         }
-        public static Order MapToEditEntity(this OrderEditModel model)
+        public static Order MapToEditEntity(this OrderEditModels model)
         {
             return new Order
             {
@@ -47,6 +48,25 @@ namespace Sales.Services.AutoMap
                 ShipPostalCode = model.ShipPostalCode,
                 ShipCountry = model.ShipCountry
             };
+        }
+        public static Order MapToEditEntity(this OrderEditModels model, Order entity)
+        {
+
+            entity.OrderId = model.OrderId;
+            entity.CustomerId = model.CustomerId;
+            entity.EmployeeId = model.EmployeeId;
+            entity.OrderDate = model.OrderDate;
+            entity.RequiredDate = model.RequiredDate;
+            entity.ShippedDate = model.ShippedDate;
+            entity.ShipVia = model.ShipVia;
+            entity.Freight = model.Freight;
+            entity.ShipName = model.ShipName;
+            entity.ShipAddress = model.ShipAddress;
+            entity.ShipCity = model.ShipCity;
+            entity.ShipRegion = model.ShipRegion;
+            entity.ShipPostalCode = model.ShipPostalCode;
+            entity.ShipCountry = model.ShipCountry;
+            return entity;
         }
         public static OrderListModels MapToModel(this Order entity)
         {
@@ -68,9 +88,9 @@ namespace Sales.Services.AutoMap
                 ShipCountry = entity.ShipCountry
             };
         }
-        public static OrderEditModel MapToEditModel(this Order entity)
+        public static OrderEditModels MapToEditModel(this Order entity)
         {
-            return new OrderEditModel
+            return new OrderEditModels
             {
                 OrderId = entity.OrderId,
                 CustomerId = entity.CustomerId,
@@ -87,6 +107,10 @@ namespace Sales.Services.AutoMap
                 ShipPostalCode = entity.ShipPostalCode,
                 ShipCountry = entity.ShipCountry
             };
+        }
+        public static List<OrderListModels> MapToModels(this List<Order> entities)
+        {
+            return entities.Select(x => x.MapToModel()).ToList();
         }
     }
 }

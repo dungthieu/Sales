@@ -12,12 +12,18 @@ namespace Sales.DataAccess.Repository
         List<Employee> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection, out int totalPage);
         List<Employee> GetAll(int currentPage, int pageSize , string sortColumn, string sortDirection,
         out int totalPage);
-        Employee GetInfor(int id);
+        Employee getEmployee(int EmployeeId, string FirstName, string lastName);
     }
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
         public EmployeeRepository(SalesContext context) : base(context)
         {
+        }
+        public Employee getEmployee(int EmployeeId, string FirstName, string lastName)
+        {
+            var query = Dbset.AsQueryable();
+            query = query.Where(x => x.EmployeeId == EmployeeId && x.FirstName == FirstName && x.LastName == lastName);
+            return query.FirstOrDefault();
         }
         public List<Employee> Search(int currentPage, int pageSize, string textSearch, string sortColumn, string sortDirection,
         out int totalPage)

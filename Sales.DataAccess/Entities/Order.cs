@@ -9,7 +9,7 @@ namespace Sales.DataAccess.Entities
     {
         public Order()
         {
-            OrderDetails = new HashSet<OrderDetail>();
+            Employees = new HashSet<Employee>();
         }
 
         public int OrderId { get; set; }
@@ -30,6 +30,6 @@ namespace Sales.DataAccess.Entities
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Shipper ShipViaNavigation { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
