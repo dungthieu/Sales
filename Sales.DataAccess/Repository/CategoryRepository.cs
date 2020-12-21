@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sales.DataAccess.Entities;
+using Sale.Api.Models;
 using Sales.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;

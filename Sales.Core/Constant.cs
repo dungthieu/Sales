@@ -21,7 +21,8 @@ namespace Sales.Core
         public const string EmployeeIsExist = "";
         public const string CustomerIsExist = "";
         public const string CategoryIsExist  = "";
-        
+        public const string DeleteSucces = "";
+
 
 
 

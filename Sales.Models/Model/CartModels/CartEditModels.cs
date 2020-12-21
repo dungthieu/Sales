@@ -1,4 +1,4 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Sale.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -8,6 +8,7 @@ namespace Sales.Services.Service
 {
     public interface IEntityService<T> 
     {
+        
         T GetById(int id);
         IEnumerable<T> GetAll();
         T Update(T entity);

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Sales.Core;
-using Sales.DataAccess.Entities;
+using Sale.Api.Models;
 using Sales.DataAccess.Repository;
 using Sales.Models.Model.CartModels;
 using Sales.Services.AutoMap;
@@ -62,7 +62,9 @@ namespace Sales.Services.Service
         }
        public bool UpdateCart(CartEditModels cartmodel, out string message)
         {
+            message = Constant.UpdateSuccess;
             var CartEntity = _cartRepository.GetById(cartmodel.ProductId);
+            return true;
 
         }
     }

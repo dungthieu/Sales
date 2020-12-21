@@ -1,4 +1,4 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Sale.Api.Models;
 using System;
 using Sales.Models.Model.CategoryModels;
 using System.Collections.Generic;

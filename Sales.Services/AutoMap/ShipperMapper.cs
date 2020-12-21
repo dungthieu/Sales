@@ -1,4 +1,4 @@
-﻿using Sales.DataAccess.Entities;
+﻿using Sale.Api.Models;
 using Sales.Models.Model.ShipperModels;
 using System;
 using System.Collections.Generic;

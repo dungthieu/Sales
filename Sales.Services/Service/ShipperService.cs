@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Sales.Core;
-using Sales.DataAccess.Entities;
+using Sale.Api.Models;
 using Sales.DataAccess.Repository;
 using Sales.Models.Model.ShipperModels;
 using Sales.Services.AutoMap;
